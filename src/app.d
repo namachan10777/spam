@@ -50,7 +50,10 @@ void main(string[] args) {
 		stderr.writeln("yet implemented");
 		break;
 	case "help":
-		stderr.writeln("yet implemented");
+		if (args.length <= 2)
+			show_help();
+		else
+			show_subcommand_help(args[2]);
 		break;
 	default:
 		writefln("invalid command name or option: %s", args[1]);
