@@ -3,6 +3,7 @@ module spam.app;
 import std.stdio;
 
 import spam.help;
+import spam.init: init;
 
 enum VERSION = "yet released";
 
@@ -25,7 +26,7 @@ void main(string[] args) {
 		show_help();
 		break;
 	case "init":
-		stderr.writeln("yet implemented");
+		init();
 		break;
 	case "list":
 		stderr.writeln("yet implemented");
