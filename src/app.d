@@ -53,7 +53,7 @@ void main(string[] args) {
 		stderr.writeln("yet implemented");
 		break;
 	default:
-		writefln("invalid command name of option %s", args[1]);
+		writefln("invalid command name or option: %s", args[1]);
 		show_help();
 	}
 }
