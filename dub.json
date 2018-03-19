@@ -1,0 +1,9 @@
+{
+	"name": "spam",
+	"authors": [
+		"Nakano Masaki"
+	],
+	"description": "spam is a source-based package manager for SATySFi.",
+	"copyright": "Copyright © 2018, Nakano Masaki",
+	"license": "LGPL-3.0"
+}
