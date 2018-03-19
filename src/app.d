@@ -4,6 +4,8 @@ import std.stdio;
 
 import spam.help;
 
+enum VERSION = "yet released";
+
 void main(string[] args) {
 	if (args.length < 2) {
 		show_help();
@@ -11,10 +13,10 @@ void main(string[] args) {
 	}
 	switch (args[1]) {
 	case "--version":
-		stderr.writeln("yet implemented");
+		writeln(VERSION);
 		break;
 	case "-v":
-		stderr.writeln("yet implemented");
+		writeln(VERSION);
 		break;
 	case "--help":
 		show_help();
