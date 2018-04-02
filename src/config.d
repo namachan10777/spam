@@ -9,18 +9,16 @@ struct Install {
 }
 
 enum CondType {
-	And,
-	Or,
 	Gret,
 	Less,
 	Eq,
-	Not
+	GretEq,
+	LessEq
 }
 
 class Cond {
 	CondType type;
 	string ver;
-	Cond right_exp, left_exp;
 }
 
 enum DepType {
