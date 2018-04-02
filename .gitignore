@@ -13,8 +13,8 @@
 
 # Executables
 *.exe
-spam
-spam-test-library
+/spam
+/spam-test-library
 
 # DUB
 .dub
