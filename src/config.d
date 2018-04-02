@@ -19,7 +19,7 @@ enum CondType {
 
 class Cond {
 	CondType type;
-	string right_str, left_str;
+	string ver;
 	Cond right_exp, left_exp;
 }
 
