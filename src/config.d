@@ -23,6 +23,17 @@ class Cond {
 	Cond right_exp, left_exp;
 }
 
+enum DepType {
+	Build,
+	Always
+}
+
+struct Dep {
+	string name;
+	DepType type;
+	Cond cond;
+}
+
 struct Config {
 	string spam_ver;
 	string ver;
@@ -34,4 +45,5 @@ struct Config {
 	string license;
 	string[][] build;
 	Install install;
+	Dep[] depends;
 }
