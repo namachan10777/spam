@@ -16,7 +16,7 @@ enum CondType {
 	LessEq
 }
 
-class Cond {
+struct Cond {
 	CondType type;
 	string ver;
 }
