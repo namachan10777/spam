@@ -61,7 +61,6 @@ Config parseConfig (string str) {
 	Config config;
 	//optional field
 	if ("spam-version" in json.object) config.spam_ver    = json.object["spam-version"].str;
-	if ("version"      in json.object) config.ver         = json.object["version"].str;
 	if ("homepage"     in json.object) config.homepage    = json.object["homepage"].str;
 	if ("bug-reports"  in json.object) config.bug_reports = json.object["bug-reports"].str;
 	if ("dev-repo"     in json.object) config.dev_repo    = json.object["dev-repo"].str;
@@ -149,7 +148,6 @@ unittest {
 	};
 	auto config = text.parseConfig;
 	assert (config.spam_ver == "1.2");
-	assert (config.ver == "0.3.1");
 	assert (config.authors == ["Nakano Masaki <namachan10777@gmail.com>"]);
 	assert (config.maintainer == "Nakano Masaki <namachan10777@gmail.com>");
 	assert (config.homepage == "https://github.com/namachan10777/spam");

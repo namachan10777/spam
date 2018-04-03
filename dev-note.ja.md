@@ -3,6 +3,7 @@
 ~/.spam
 |
 +--current.txt
++--db.dat
 |
 +--env/
 |  |
@@ -19,16 +20,12 @@
 +--archive/
 |  |
 |  +--<package name>
-|     |
-|     +--<ver>.tar.gz
 |
 +--index/
 ```
 current.txtには現在の環境の名前だけが書かれています。
+db.datには依存関係のキャッシュが入っています。
 depends.jsonにはその環境にインストールされているパッケージの名前とバージョンが記載されています。
 hash/, fonts/, hyph/, saty/とunicde/は~/.satysfi/dist以下のものと同じです。
-archive/にはダウンロードされたtar.gzファイルがキャッシュとして保存されます。
+archive/にはクローンされたGitリポジトリが置かれます。
 index/はspam-repositoryをローカルにクローンしたものです。
-# spamファイル
-<package name>.spamとspamは同じものとして扱われます。
-tar.gzアーカイブにはspamは含まれていなくても問題ありません。

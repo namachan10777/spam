@@ -34,7 +34,6 @@ struct Dep {
 
 struct Config {
 	string spam_ver;
-	string ver;
 	string[] authors;
 	string maintainer;
 	string homepage;
