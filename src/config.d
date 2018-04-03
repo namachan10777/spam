@@ -8,19 +8,6 @@ struct Install {
 	string[] unidata;
 }
 
-enum CondType {
-	Gret,
-	Less,
-	Eq,
-	GretEq,
-	LessEq
-}
-
-struct Cond {
-	CondType type;
-	string ver;
-}
-
 enum DepType {
 	Build,
 	Always
@@ -29,7 +16,6 @@ enum DepType {
 struct Dep {
 	string name;
 	DepType type;
-	Cond[] conds;
 }
 
 struct Config {
