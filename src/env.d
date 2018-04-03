@@ -1,24 +1,13 @@
 module spam.env;
 
 import std.json : JSONValue;
+import std.algorithm.iteration : map;
+import std.range : array;
 
-struct Dep {
-	string name;
-	string ver;
+JSONValue jsonOfDeps (string[] names) {
+	return JSONValue(names);
 }
 
-JSONValue jsonOfDeps (Dep[] deps) {
-	JSONValue json;
-	foreach(dep; deps) {
-		json.object[dep.name] = dep.ver;
-	}
-	return json;
-}
-
-Dep[] depsOfJson(JSONValue json) {
-	Dep[] deps;
-	foreach(name; json.object.keys) {
-		deps ~= Dep(name, json.object[name].str);
-	}
-	return deps;
+string[] depsOfJson(JSONValue json) {
+	return json.array.map!(json => json.str).array;
 }
