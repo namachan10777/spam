@@ -29,7 +29,7 @@ enum DepType {
 struct Dep {
 	string name;
 	DepType type;
-	Cond cond;
+	Cond[] conds;
 }
 
 struct Config {

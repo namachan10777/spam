@@ -12,7 +12,7 @@ import spam.config;
 bool is_white(in char c) {
 	return c == ' ' || c == '\t' || c == '\n' || c == '\r';
 }
-Cond parseCond(string src) {
+Cond[] parseCond(string src) {
 	bool op_shifting;
 	string left, right;
 	size_t begin, idx;
@@ -38,13 +38,16 @@ Cond parseCond(string src) {
 	right = src[begin..idx];
 	while(idx < src.length && is_white(src[idx])) ++idx;
 
-	if (idx != src.length || right.length == 0) throw new Exception("Syntax error at dependency version");
+	Cond[] rest;
+	if (idx != src.length || right.length == 0) {
+		rest = parseCond(src[idx..$]);
+	}
 	switch(left) {
-	case "<":  return Cond(CondType.Less,   right);
-	case "<=": return Cond(CondType.LessEq, right);
-	case ">":  return Cond(CondType.Gret,   right);
-	case ">=": return Cond(CondType.GretEq, right);
-	case "=":  return Cond(CondType.Eq,     right);
+	case "<":  return Cond(CondType.Less,   right) ~ rest;
+	case "<=": return Cond(CondType.LessEq, right) ~ rest;
+	case ">":  return Cond(CondType.Gret,   right) ~ rest;
+	case ">=": return Cond(CondType.GretEq, right) ~ rest;
+	case "=":  return Cond(CondType.Eq,     right) ~ rest;
 	default:
 		throw new Exception("Syntax error at dependency version");
 	}
@@ -53,7 +56,8 @@ unittest {
 	assert(collectExceptionMsg(parseCond("")) == "Syntax error at dependency version");
 	assert(collectExceptionMsg(parseCond("= 1 a")) == "Syntax error at dependency version");
 	assert(collectExceptionMsg(parseCond("== 1 ")) == "Syntax error at dependency version");
-	assert(parseCond(" <= 1.4a") == Cond(CondType.LessEq, "1.4a"));
+	assert(parseCond(" <= 1.4a") == [Cond(CondType.LessEq, "1.4a")]);
+	assert(parseCond(" <= 1.4a >= 1.5b") == [Cond(CondType.LessEq, "1.4a"), Cond(CondType.GretEq, "1.5b")]);
 }
 
 Config parseConfig (string str) {
@@ -82,7 +86,7 @@ Config parseConfig (string str) {
 				dep.type = DepType.Always;
 			}
 			auto cond_txt = dep_json.object["version"].str;
-			dep.cond = cond_txt.parseCond;
+			dep.conds = cond_txt.parseCond;
 			dep.name = dep_name;
 		}
 	}
