@@ -4,5 +4,4 @@ enum Dir {
 	home = "~/.spam",
 	env = "~/.spam/env",
 	archive = "~/.spam/archive",
-	index  = "~/.spam/index"
 }

@@ -33,11 +33,6 @@ int init() {
 	mkdir (Dir.home.expandTilde);
 	mkdir (Dir.env.expandTilde);
 	mkdir (Dir.archive.expandTilde);
-	auto gitStatus = execute(["git", "clone", "https://github.com/namachan10777/spam-repository", Dir.index.expandTilde]);
-	if (gitStatus.status != 0) {
-		stderr.writefln("init failed. git exited with code %s.", gitStatus.status);
-		return -1;
-	}
 	if ("~/.satysfi".expandTilde.exists) {
 		if (initEnvFromLocal () != 0) return -1;
 	}
