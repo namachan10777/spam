@@ -7,7 +7,7 @@ import std.process: execute;
 
 import spam.path: Dir;
 import spam.util: copyRec;
-import spam.env: jsonOfDeps;
+import spam.config: jsonOfDeps;
 
 int initEnvFromGithub () {
 	auto gitStatus = execute(["git", "clone", "https://github.com/gfngfn/satysfi", tempDir()~"/satysfi"]);

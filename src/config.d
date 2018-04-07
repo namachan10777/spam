@@ -1,8 +1,16 @@
 module spam.config;
 import std.typecons : Tuple, tuple;
-import std.json : parseJSON;
+import std.json : parseJSON, JSONValue;
 import std.algorithm.iteration : map;
 import std.range : array;
+
+JSONValue jsonOfDeps (string[] names) {
+	return JSONValue(names);
+}
+
+string[] depsOfJson(JSONValue json) {
+	return json.array.map!(json => json.str).array;
+}
 
 struct Install {
 	Tuple!(string, string)[] fonts;
