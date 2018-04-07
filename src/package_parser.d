@@ -23,18 +23,8 @@ Config parseConfig (string str) {
 		}
 	}
 	if ("depends"      in json.object) {
-		foreach (dep_name; json.object["depends"].object.keys) {
-			Dep dep;
-			auto dep_json = json.object["depends"].object[dep_name];
-			if ("when" in dep_json.object) {
-				if (dep_json.object["when"].str == "build")
-					dep.type = DepType.Build;
-				else throw new Exception (format("Invalid \"when\" element's value %s", dep_json.object["when"].str));
-			}
-			else {
-				dep.type = DepType.Always;
-			}
-			dep.name = dep_name;
+		foreach (dep_name; json.object["depends"].array) {
+			config.depends ~= dep_name.str;
 		}
 	}
 	//required field
@@ -91,10 +81,9 @@ unittest {
 					"path/to/unidata"
 				]
 			},
-			"depends": {
-				"foo" : { "version":"= 1.1.1", "when":"build"},
-				"bar" : { "version":">= 2.1.0" }
-			}
+			"depends": [
+				"foo/bar"
+			]
 		}
 	};
 	auto config = text.parseConfig;
@@ -107,4 +96,5 @@ unittest {
 	assert (config.license == "LGPL-3.0");
 	assert (config.build == [["echo", "building"]]);
 	assert (config.install == Install([tuple("hoge", "path/to/hoge.otf")], ["path/to/saty.saty"], ["path/to/hyph"], ["path/to/unidata"]));
+	assert (config.depends == ["foo/bar"]);
 }

@@ -7,17 +7,6 @@ struct Install {
 	string[] hyph;
 	string[] unidata;
 }
-
-enum DepType {
-	Build,
-	Always
-}
-
-struct Dep {
-	string name;
-	DepType type;
-}
-
 struct Config {
 	string spam_ver;
 	string[] authors;
@@ -28,5 +17,5 @@ struct Config {
 	string license;
 	string[][] build;
 	Install install;
-	Dep[] depends;
+	string[] depends;
 }
