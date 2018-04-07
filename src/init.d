@@ -30,19 +30,19 @@ int init() {
 		stderr.writeln("init failed. directory ~/.spam is already exists.");
 		return -1;
 	}
-	mkdir (Dir.home.expandTilde);
-	mkdir (Dir.env.expandTilde);
-	mkdir (Dir.archive.expandTilde);
+	Dir.home.expandTilde.mkdir;
+	Dir.archive.expandTilde.mkdir;
 	if ("~/.satysfi".expandTilde.exists) {
 		if (initEnvFromLocal () != 0) return -1;
 	}
 	else {
 		if (initEnvFromGithub () != 0) return -1;
 	}
-	copyRec("~/.spam/dist-origin".expandTilde, "~/.spam/env/system".expandTilde);
-	auto currentEnv = File("~/.spam/current.txt".expandTilde, "w");
-	auto systemDeps = File("~/.spam/env/system/env.json".expandTilde, "w");
-	currentEnv.writeln("system");
+	copyRec("~/.spam/dist-origin/fonts".expandTilde, "~/.spam/fonts".expandTilde);
+	copyRec("~/.spam/dist-origin/hash".expandTilde, "~/.spam/hash".expandTilde);
+	copyRec("~/.spam/dist-origin/hyph".expandTilde, "~/.spam/hyph".expandTilde);
+	copyRec("~/.spam/dist-origin/unidata".expandTilde, "~/.spam/unidata".expandTilde);
+	auto systemDeps = File("~/.spam/depends.json".expandTilde, "w");
 	systemDeps.writefln(jsonOfDeps([]).toString);
 	return 0;
 }
