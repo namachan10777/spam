@@ -4,6 +4,7 @@ import std.stdio;
 
 import spam.help;
 import spam.init: init;
+import spam.io : install;
 
 enum VERSION = "yet released";
 
@@ -35,7 +36,11 @@ void main(string[] args) {
 		stderr.writeln("yet implemented");
 		break;
 	case "install":
-		stderr.writeln("yet implemented");
+		if (args.length == 2) {
+			writeln("spam install required argments");
+			"install".show_subcommand_help;
+		}
+		install(args[2]);
 		break;
 	case "remove":
 		stderr.writeln("yet implemented");
