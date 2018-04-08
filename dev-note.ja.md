@@ -3,7 +3,7 @@
 ~/.spam
 |
 |
-+--depends.json
++--installed.json
 |
 +--hash/
 +--fonts/
