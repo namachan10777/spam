@@ -42,7 +42,7 @@ int init() {
 	copyRec("~/.spam/dist-origin/hash".expandTilde, "~/.spam/hash".expandTilde);
 	copyRec("~/.spam/dist-origin/hyph".expandTilde, "~/.spam/hyph".expandTilde);
 	copyRec("~/.spam/dist-origin/unidata".expandTilde, "~/.spam/unidata".expandTilde);
-	auto systemDeps = File("~/.spam/depends.json".expandTilde, "w");
+	auto systemDeps = File("~/.spam/installed.json".expandTilde, "w");
 	systemDeps.writefln(jsonOfDeps([]).toString);
 	return 0;
 }
