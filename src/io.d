@@ -62,6 +62,6 @@ void install(string url) {
 		throw new Exception("Invalid package");
 	}
 	else {
-		auto config = parseConfig(cast(string)(package_json.read));
+		auto config = package_json.readText.parseConfig;
 	}
 }
