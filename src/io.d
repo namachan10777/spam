@@ -1,12 +1,13 @@
 module spam.io;
 
+import std.algorithm.searching : any;
 import std.file : exists, chdir, readText;
 import std.process : execute;
 import std.string : split;
 import std.format : format;
 import std.json : parseJSON;
 import std.stdio : File;
-import spam.config: parseConfig, depsOfJson, jsonOfDeps;
+import spam.config: parseConfig, depsOfJson, jsonOfDeps, Config;
 import spam.path : Path;
 
 struct PackName {
@@ -54,6 +55,13 @@ void sync(PackName name) {
 	}
 }
 
+void build(Path path, Config config) {
+	chdir(path.real_path);
+	foreach (cmd; config.build) {
+		execute(cmd);
+	}
+}
+
 //TODO remove package repo when install failed
 void install(string url) {
 	auto installed = Path(["installed.json"]).real_path.readText.parseJSON.depsOfJson;
@@ -66,6 +74,8 @@ void install(string url) {
 	}
 	else {
 		auto config = package_json_path.real_path.readText.parseConfig;
+		build(Path(["archive", packname.packname]), config);
+		//copy_files(config);
 	}
 	auto installed_file = File(Path(["installed.json"]).real_path, "w");
 	installed_file.writeln(installed.jsonOfDeps.toString);
