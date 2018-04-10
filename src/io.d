@@ -1,13 +1,13 @@
 module spam.io;
 
 import std.file : exists, chdir, readText;
-import std.path : expandTilde;
 import std.process : execute;
 import std.string : split;
 import std.format : format;
 import std.json : parseJSON;
 import std.stdio : File;
 import spam.config: parseConfig, depsOfJson, jsonOfDeps;
+import spam.path : Path;
 
 struct PackName {
 	string full_url;
@@ -44,29 +44,29 @@ PackName complete_name (string url) {
 }
 
 void sync(PackName name) {
-	if (exists(expandTilde("~/.spam/archive/"~name.packname))) {
-		chdir(expandTilde("~/.spam/archive/"~name.packname));
+	if (Path(["archiv", name.packname]).real_path.exists) {
+		chdir(Path(["archive",name.packname]).real_path);
 		execute(["git", "pull"]);
 	}
 	else {
 		import std.stdio;
-		execute(["git", "clone", name.full_url, expandTilde("~/.spam/archive/"~name.packname)]);
+		execute(["git", "clone", name.full_url, Path(["archive",name.packname]).real_path]);
 	}
 }
 
 //TODO remove package repo when install failed
 void install(string url) {
-	auto installed = "~/.spam/installed.json".expandTilde.readText.parseJSON.depsOfJson;
+	auto installed = Path(["installed.json"]).real_path.readText.parseJSON.depsOfJson;
 	auto packname = url.complete_name;
 	installed ~= packname.full_url;
 	sync(packname);
-	auto package_json = expandTilde("~/.spam/archive/"~packname.packname~"/package.json");
-	if (!package_json.exists) {
+	auto package_json_path = Path(["archive", packname.packname, "package.json"]);
+	if (!package_json_path.real_path.exists) {
 		throw new Exception("Invalid package");
 	}
 	else {
-		auto config = package_json.readText.parseConfig;
+		auto config = package_json_path.real_path.readText.parseConfig;
 	}
-	auto installed_file = File("~/.spam/installed.json".expandTilde, "w");
+	auto installed_file = File(Path(["installed.json"]).real_path, "w");
 	installed_file.writeln(installed.jsonOfDeps.toString);
 }
