@@ -1,0 +1,12 @@
+opam-version:"1.2"
+maitainer: "namachan10777@gmail.com"
+authors: ["Nakano Masaki"]
+homepage: "https://github.com/namachan10777/spam"
+bug-reports: "https://github.com/namachan10777/spam/issues"
+dev-repo: "https://github.com/namachan10777/spam.git"
+license: "LGPL-3.0"
+build: [["jbuilder" "build" "--only-packages" "%{name}%" "--root" "." jobs "@install" ]]
+depends: [
+	"jbuilder" {build}
+	"yojson"
+]

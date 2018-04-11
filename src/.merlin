@@ -1,0 +1,6 @@
+B ../_build/default/src
+FLG -w -40
+PKG biniou
+PKG easy-format
+PKG yojson
+S .
