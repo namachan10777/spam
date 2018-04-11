@@ -24,3 +24,8 @@ docs/
 
 # Code coverage
 *.lst
+
+# JBuilder
+_build
+.merlin
+*.install
