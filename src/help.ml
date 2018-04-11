@@ -6,7 +6,7 @@ let remove_dscr = "Remove a list of packages."
 let update_dscr = "Update the list of available packages."
 let upgrade_dscr = "Upgrade the installed package to latest version."
 let switch_dscr = "Manage multiple environments."
-let pin_dscr = "Pin a given package to specific version or source"
+let pin_dscr = "Pin a given package to specific source"
 
 
 let show_init_help () = print_endline begin
@@ -91,13 +91,11 @@ let show_pin_help () = print_endline begin
 	"pin\n"^
 	"\n"^
 	"usage:\n"^
-	"    spam pin PACKAGE [PATH|VERSION]\n"^
+	"    spam pin PACKAGE [PATH]\n"^
 	"PACKAGE:\n"^
 	"    Package name.\n"^
 	"PATH:\n"^
 	"    Package source repository path\n"^
-	"VERSION:\n"^
-	"    Package version specification. e.g '>=1.0.0', '1.2.1.'\n"^
 	"description\n"^
 	(Printf.sprintf "    %s\n" pin_dscr) end
 
