@@ -1,0 +1,2 @@
+# SPAM
+SATySFi PAckage Manager
